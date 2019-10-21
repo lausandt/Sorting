@@ -1,0 +1,67 @@
+/**
+ * 
+ */
+package sortingAlgorithms;
+
+import java.util.Arrays;
+
+/**
+ * This is part of an investigation of sorting algorithms in Java and Haskell
+ * These are simple algorithms for java
+ * @author Lau Sandt
+ * https://github.com/lausandt/Sorting
+ */
+public class SortIngAlgorithms {
+
+	public static void insertSort(int[] array) {
+		for (int k = 1; k < array.length; k++ ) {		// loop through the array
+			int current = array[k];						// insert current item 
+			int j = k;									// find the correct index for j
+			while (j > 0 && array[j-1] > current) {     // -> array[j-1] must go to the right of current
+				array[j] = array[j-1];					// swap places (part one) 
+				j--;                                	// look to the left of current
+			}
+			array[j] = current;							// proper place for current
+		}
+	}
+	
+	/**
+	 * Simple mergeSort algorithm
+	 * Simple because it can take an array
+	 * and uses the comparator of array
+	 */
+	public static void mergeSort(int[] array) {
+		int n = array.length;
+		if (n < 2) return; 
+		int mid = n/2;
+		int[] left = Arrays.copyOfRange(array, 0, mid);	// using copyOfRange to fill sub arrays with elements of array
+		int[] right = Arrays.copyOfRange(array,mid,n);  
+		mergeSort(left);
+		mergeSort(right);
+		merge(left, right, array);
+	}
+
+	private static void merge(int[] left, int[] right, int[] array) {
+		int i =0;  int j = 0;
+		while (i+j < array.length) {
+			if (j == right.length || (i < left.length && left[i] < right[j])) // if the right sub array is empty then fill up the rest with the left or compare
+				array[i+j] = left[i++];
+			else 
+				array[i+j]=right[j++];	
+		}		
+	}
+
+	public static void main(String[] args) {
+		int[] test = {3,5,1,7,6,2,8,4};
+		for (int i = 0; i < test.length;i++ )
+			System.out.print(test[i]);
+
+		System.out.println('\n');
+		mergeSort(test);
+		for (int i = 0; i < test.length;i++ )
+			System.out.print(test[i]);
+		
+
+	}
+
+}
