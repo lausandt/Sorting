@@ -1,0 +1,114 @@
+SortingPseudos
+
+InsertionSort(A)
+{ Java }
+	
+	Input:  An array A of comparable elements
+	Output: The array A in sorted order
+	
+	for k from 1 to n-1
+	  insert A[k] in proper order in A[0],A[1],...,A[K]
+	  
+
+InsertionSort(A)
+{ Haskell }
+	
+	Input:  An list A of comparable elements
+	Output: The list A in sorted order
+	
+	if A is empty then end 
+	else insert(A[0] (InsertionSort(A[1..n])
+	
+Insert(e A)
+{ Helper for Haskell }
+
+   Input:  an element e of list A and list A
+   Output: List A sorted
+   
+   if e < A[0] then e is const on the front of A
+   else A[0] is const upon (Insert(e A[1..n]) 
+   
+MergeSort(A)
+{ Haskell }
+	
+   Input:  List A
+   Output: List A sorted
+	
+   n <- length A
+   if n < 2 stop
+   mid <- n/2
+   List left <- first mid-1 of A
+   List right <- the other items of A
+   mergeSort(left)
+   mergeSort(right)
+   merge(left, right)
+   
+Merge(left, right)
+{ helper haskell }
+
+   Input: left, right and are list of the same comparable types
+   Output: sorted A
+   
+   if left is empty and right is not
+     return right
+   if right is empty and left is not
+     return left
+   -- compare elements
+   if the first of left < right
+      then keep the first of left and cons merge((left - the first) right)
+      else keep the first of right and cons merge(left (right)-first)
+      
+MergeSort(A)
+{ Java }
+	
+   Input:  Array A
+   Output: Array A sorted
+	
+   n <- length A
+   if n < 2 stop
+   mid <- n/2
+   List left <- first mid-1 of A
+   List right <- the other items of A
+   mergeSort(left)
+   mergeSort(right)
+   merge(left, right, A)
+   
+Merge(left,right,A)
+{ utility Java }
+
+   int i <- 0
+   int j <- 0
+   while i+j < length of A
+     if j = length of right or (i < length of left and left[i] < right[j])
+       A[i+j] <- left[i]
+       i += 1
+     else
+       A[i+j] <- right[j]
+       j += 1
+       
+
+ MergeSort(A)
+{ Java recursive }
+	
+   Input:  Array A
+   Output: Array A sorted
+	
+   n <- length A
+   if n < 2 stop
+   mid <- n/2
+   List left <- first mid-1 of A
+   List right <- the other items of A
+   mergeSort(left)
+   mergeSort(right)
+   merge(left, right, A, i=0, j=0)
+   
+Merge(left,right,A)
+{ utility Java }
+
+   if i+j < length of A
+     if j = length of right or (i < length of left and left[i] < right[j])
+       A[i+j] <- left[i]
+       merge(left, right, A, i+1, j)
+     else
+       A[i+j] <- right[j]
+       merge(left, right, A, i, j+1)
