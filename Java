@@ -9,7 +9,7 @@ import java.util.Arrays;
  * This is part of an investigation of sorting algorithms in Java and Haskell
  * These are simple algorithms for java
  * @author Lau Sandt
- * https://github.com/lausandt/Sorting
+ *
  */
 public class SortIngAlgorithms {
 
@@ -50,14 +50,43 @@ public class SortIngAlgorithms {
 				array[i+j]=right[j++];	
 		}		
 	}
+	
+	public static void mergeSortR(int[] array) {
+		int n = array.length;
+		if (n < 2) return; 
+		int mid = n/2;
+		int[] left = Arrays.copyOfRange(array, 0, mid);	// using copyOfRange to fill sub arrays with elements of array
+		int[] right = Arrays.copyOfRange(array,mid,n);  
+		mergeSort(left);
+		mergeSort(right);
+		int i = 0;
+		int j = 0;
+		merge(left, right, array, i, j);
+	}
+
+	
+	
+
+	private static void merge(int[] left, int[] right, int[] array, int i, int j) {
+		if (i+j < array.length) {
+			if (j == right.length || (i < left.length && left[i] < right[j])) {
+				array[i+j] = left[i];
+				merge(left, right, array, i+1,j);
+			}
+			else {
+				array[i+j]=right[j];
+				merge(left, right, array, i,j+1);
+			}
+		}
+	}
 
 	public static void main(String[] args) {
-		int[] test = {3,5,1,7,6,2,8,4};
+		int[] test = {3,5,1,6,2,8,4};
 		for (int i = 0; i < test.length;i++ )
 			System.out.print(test[i]);
 
 		System.out.println('\n');
-		mergeSort(test);
+		mergeSortR(test);
 		for (int i = 0; i < test.length;i++ )
 			System.out.print(test[i]);
 		
